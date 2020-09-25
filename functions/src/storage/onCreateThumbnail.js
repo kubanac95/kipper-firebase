@@ -1,10 +1,10 @@
-const functions = require('firebase-functions');
-const admin = require('../admin');
+const functions = require("firebase-functions");
+const admin = require("../admin");
 
-const os = require('os');
-const fs = require('fs-extra');
-const path = require('path');
-const sharp = require('sharp');
+const os = require("os");
+const fs = require("fs");
+const path = require("path");
+const sharp = require("sharp");
 
 const storage = admin.storage().bucket();
 
@@ -15,14 +15,14 @@ module.exports = functions.storage.object().onFinalize(async (object) => {
   const contentType = object.contentType; // File content type.
 
   // ? Not an image, skip creating thumbnail
-  if (!contentType.startsWith('image/')) {
+  if (!contentType.startsWith("image/")) {
     return false;
   }
 
   const fileName = path.basename(filePath);
 
   // ? Already a thumbnail, skip
-  if (fileName.startsWith('thumb_')) {
+  if (fileName.startsWith("thumb_")) {
     return false;
   }
 
